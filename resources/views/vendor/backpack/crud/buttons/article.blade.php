@@ -1,0 +1,1 @@
+<a href="/article/{{$entry->id}}/preview" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-link"></i> 查看</a>

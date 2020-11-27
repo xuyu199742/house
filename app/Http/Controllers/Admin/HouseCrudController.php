@@ -11,6 +11,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\HouseRequest as StoreRequest;
 use App\Http\Requests\HouseRequest as UpdateRequest;
 use Backpack\CRUD\CrudPanel;
+use function PHPSTORM_META\type;
 
 /**
  * Class HouseCrudController
@@ -309,14 +310,8 @@ class HouseCrudController extends CrudController
                 'name'                => 'years',
                 'label'               => '年代',
                 'tab'                 => '详细信息',
-                'readonly'            => false,
-                'type'                => 'date_picker',
-                'date_picker_options' => [
-                    'todayHighlight'  => true,
-                    'clearBtn'        => true,
-                    'format'          => 'yyyy-mm-dd',
-                    'language'        => "zh-CN",
-                ],
+                'type'                => 'number',
+                'suffix'              => '年',
             ],
             [
                 'name'  => 'ownership',

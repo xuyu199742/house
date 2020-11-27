@@ -48,10 +48,10 @@ class HouseController extends ApiController
                             break;
                         case 'price':
                             foreach ($filter as $_price_type => $_price_zone) {
-                                $_price_zone = explode('-', $_price_zone[ 0 ] ?? '-');
+                                $_price_zone = explode('-', $_price_zone[0] ?? '-');
 
-                                $from = $_price_zone[ 0 ] ?? 0;
-                                $to   = $_price_zone[ 1 ] ?? INF;
+                                $from = $_price_zone[0] ?? 0;
+                                $to = $_price_zone[1] ?? INF;
 
                                 $builder->priceBetween($_price_type, $from, $to);
                             }
@@ -61,8 +61,8 @@ class HouseController extends ApiController
                             foreach ($filter as $_area_zone => $_value) {
                                 $_area_zone = explode('-', $_area_zone ?? '-');
 
-                                $from          = $_area_zone[ 0 ] ?? 0;
-                                $to            = $_area_zone[ 1 ] ?? INF;
+                                $from = $_area_zone[0] ?? 0;
+                                $to = $_area_zone[1] ?? INF;
                                 $area_zones [] = [
                                     $from, $to
                                 ];
@@ -102,7 +102,7 @@ class HouseController extends ApiController
         $user = auth()->user();
 
         $builder = $user->houses()->where('status', House::STATUS_PUBLISH);
-        $models  = $builder->paginate();
+        $models = $builder->paginate();
 
         return $this->success($models);
     }
@@ -110,9 +110,10 @@ class HouseController extends ApiController
     public function show($id)
     {
         $house = House::query()->select(
-           ['id', 'name', 'title', 'room_type', 'orientation', 'price','decorate', 'orientation', 'house_area',
-               'display_price', 'open_at', 'level_desc', 'building_type','orientation', 'years', 'residential_id'
-           ]
+            ['id', 'name', 'title', 'room_type', 'orientation', 'price', 'decorate', 'orientation', 'house_area', 'ownership',
+                'display_price', 'open_at', 'level_desc', 'building_type', 'orientation', 'years', 'residential_id', 'around_traffic',
+                'around_school', 'around_shop', 'around_bank', 'around_hospital', 'around_park'
+            ]
         )->with('residential.properties')->findOrFail($id);
 //        $house->view();
 //        $house->increment('total_view');
@@ -120,15 +121,15 @@ class HouseController extends ApiController
 //        $articles     = $house->articles()->orderBy('created_at', 'desc')->take(4)->get();
 //        $informations = $house->informations()->orderBy('created_at', 'desc')->take(4)->get();
 //        $recommends   = House::published()->inRandomOrder()->take(3)->get();
-          $photos       = Photo::ofHouse($house->id)->ofCategory('封面图')->take(10)->get();
+        $photos = Photo::ofHouse($house->id)->ofCategory('封面图')->take(10)->get();
 
         return $this->success([
-            'house'        => $house,
+            'house' => $house,
 //            'comments'     => $comments,
 //            'articles'     => $articles,
 //            'informations' => $informations,
 //            'recommends'   => $recommends,
-            'photos'       => $photos,
+            'photos' => $photos,
         ]);
     }
 
@@ -155,7 +156,7 @@ class HouseController extends ApiController
 
     public function informations($id)
     {
-        $house   = House::findOrFail($id);
+        $house = House::findOrFail($id);
         $builder = $house->informations()->orderBy('created_at', 'desc');
         if ($category = request()->get('category')) {
             if ('全部' != $category) {
@@ -165,29 +166,29 @@ class HouseController extends ApiController
         $models = $builder->paginate();
 
         return $this->success([
-            'house'        => $house,
+            'house' => $house,
             'informations' => $models
         ]);
     }
 
     public function comments($id)
     {
-        $house  = House::findOrFail($id);
+        $house = House::findOrFail($id);
         $models = $house->comments()->approved()->isRoot()->orderBy('created_at', 'desc')->paginate();
 
         return $this->success([
-            'house'    => $house,
+            'house' => $house,
             'comments' => $models
         ]);
     }
 
     public function articles($id)
     {
-        $house  = House::findOrFail($id);
+        $house = House::findOrFail($id);
         $articles = $house->articles()->orderBy('created_at', 'desc')->paginate();
 
         return $this->success([
-            'house'    => $house,
+            'house' => $house,
             'articles' => $articles
         ]);
     }
@@ -202,9 +203,9 @@ class HouseController extends ApiController
 
     public function submitComment($id)
     {
-        $house   = House::findOrFail($id);
+        $house = House::findOrFail($id);
         $comment = Comment::create([
-            'content'   => request('content'),
+            'content' => request('content'),
             'parent_id' => request('parent_id'),
         ]);
         $house->comments()->save($comment);
@@ -215,7 +216,7 @@ class HouseController extends ApiController
     public function favorite($id)
     {
         $house = House::findOrFail($id);
-        $user  = auth()->user();
+        $user = auth()->user();
         $user->houses()->attach($house);
         $house->increment('total_favor');
 
@@ -225,7 +226,7 @@ class HouseController extends ApiController
     public function removeFavorite($id)
     {
         $house = House::findOrFail($id);
-        $user  = auth()->user();
+        $user = auth()->user();
         $user->houses()->detach($house);
         $house->decrement('total_favor');
 
@@ -235,7 +236,7 @@ class HouseController extends ApiController
     public function subscribe($id)
     {
         $house = House::findOrFail($id);
-        $user  = auth()->user();
+        $user = auth()->user();
         $house->subscribers()->attach($user);
 
         return $this->success($house);
@@ -244,7 +245,7 @@ class HouseController extends ApiController
     public function removeSubscribe($id)
     {
         $house = House::findOrFail($id);
-        $user  = auth()->user();
+        $user = auth()->user();
         $house->subscribers()->detach($user);
 
         return $this->success($house);
@@ -252,8 +253,8 @@ class HouseController extends ApiController
 
     public function quickSearch()
     {
-        $keyword  = request('keyword');
-        $builder  = House::where('name', 'like', "%{$keyword}%")
+        $keyword = request('keyword');
+        $builder = House::where('name', 'like', "%{$keyword}%")
             ->orWhere('id', 'like', "%{$keyword}%");
         $per_page = request('per_page') ?? 10;
 

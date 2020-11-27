@@ -80,7 +80,8 @@ class CreateHousesTable extends Migration
             $table->boolean('category_4')->default(false)->comment('最新摇号');
             $table->boolean('category_5')->default(false)->comment('摇号剩余');
 
-            $table->string('room_type')->nullable()->comment('房型');
+            $table->integer('room')->nullable()->comment('室');
+            $table->integer('hall')->nullable()->comment('厅');
             $table->string('title')->nullable()->comment('标题');
             $table->string('orientation')->nullable()->comment('朝向');
             $table->string('building_type')->nullable()->comment('楼型');

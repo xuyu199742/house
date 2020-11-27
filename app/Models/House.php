@@ -46,8 +46,8 @@ class House extends Model
 
     protected $table = 'houses';
     protected $guarded = [ 'id' ];
-    protected $hidden = [ 'search_meta', 'user' ];
-//    protected $appends = [ 'is_favor', 'comment_count', 'is_subscribe' ,'qr_url'];
+    protected $hidden = [ 'search_meta', 'user', 'hall', 'room' ];
+    protected $appends = [ 'room_type'];
     protected $with = [ 'tags', 'property_types' ];
 
     /*
@@ -252,23 +252,14 @@ class House extends Model
     public function scopeOfHousetype($query, $housetypes)
     {
         return $query->where(function ($_query) use ($housetypes) {
-            $_query->whereExists(function ($__query) use ($housetypes) {
-                $__query->select(DB::raw(1))
-                    ->from('housetypes')
-                    ->whereRaw('housetypes.house_id = houses.id');
-                $first = true;
-
-                $__query->where(function ($__query) use ($housetypes) {
-                    foreach ($housetypes as $housetype) {
-                        $operate = '=';
-                        if ($housetype == '>5') {
-                            $operate   = '>';
-                            $housetype = 5;
-                        }
-                        $__query->orWhere('housetypes.bedroom_count', $operate, $housetype);
-                    }
-                });
-            });
+            foreach ($housetypes as $housetype) {
+                $operate = '=';
+                if ($housetype == '>5') {
+                    $operate   = '>';
+                    $housetype = 5;
+                }
+                $__query->orWhere('room', $operate, $housetype);
+            }
 
             return $_query;
         });
@@ -319,6 +310,15 @@ class House extends Model
         }
 
         return null;
+    }
+
+    public function getRoomTypeAttribute()
+    {
+        $room = $this->room ?? 1;
+        $hall = $this->room ?? 1;
+
+        return "{$room}室{$hall}厅";
+
     }
 
 

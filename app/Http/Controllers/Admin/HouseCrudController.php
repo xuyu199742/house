@@ -183,9 +183,23 @@ class HouseCrudController extends CrudController
                 'tab'    => '详细信息',
             ],
             [
-                'name'  => 'room_type',
-                'label' => '房型',
-                'tab'   => '详细信息'
+                'name'  => 'room',
+                'label' => '室',
+                'type'  => 'number',
+                'tab'   => '详细信息',
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-6'
+                ],
+
+            ],
+            [
+                'name'  => 'hall',
+                'label' => '厅',
+                'tab'  => '详细信息',
+                'type' => 'number',
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-6'
+                ],
             ],
             [
                 'name'        => 'decorate',
@@ -412,47 +426,47 @@ class HouseCrudController extends CrudController
 //                ],
 //                'tab'   => '搜索优化',
 //            ],
-//            [
-//                'name'   => 'price_from',
-//                'label'  => '单价(最低)',
-//                'suffix' => '元/㎡',
-//                'tab'    => '搜索优化',
-//            ],
-//            [
-//                'name'   => 'price_to',
-//                'label'  => '单价(最高)',
-//                'suffix' => '元/㎡',
-//                'tab'    => '搜索优化',
-//            ],
-//            [
-//                'name'   => 'amount_from',
-//                'label'  => '总价(最低)',
-//                'suffix' => '万元',
-//                'tab'    => '搜索优化',
-//            ],
-//            [
-//                'name'   => 'amount_to',
-//                'label'  => '总价(最高)',
-//                'suffix' => '万元',
-//                'tab'    => '搜索优化',
-//            ],
-//            [
-//                'name'   => 'area_from',
-//                'label'  => '面积(最低)',
-//                'suffix' => '㎡',
-//                'tab'    => '搜索优化',
-//            ],
-//            [
-//                'name'   => 'area_to',
-//                'label'  => '面积(最高)',
-//                'suffix' => '㎡',
-//                'tab'    => '搜索优化',
-//            ],
-//            [
-//                'name'  => 'search_keywords',
-//                'label' => '搜索关键词 (逗号分隔)',
-//                'tab'   => '搜索优化',
-//            ],
+            [
+                'name'   => 'price_from',
+                'label'  => '单价(最低)',
+                'suffix' => '元/㎡',
+                'tab'    => '搜索优化',
+            ],
+            [
+                'name'   => 'price_to',
+                'label'  => '单价(最高)',
+                'suffix' => '元/㎡',
+                'tab'    => '搜索优化',
+            ],
+            [
+                'name'   => 'amount_from',
+                'label'  => '总价(最低)',
+                'suffix' => '万元',
+                'tab'    => '搜索优化',
+            ],
+            [
+                'name'   => 'amount_to',
+                'label'  => '总价(最高)',
+                'suffix' => '万元',
+                'tab'    => '搜索优化',
+            ],
+            [
+                'name'   => 'area_from',
+                'label'  => '面积(最低)',
+                'suffix' => '㎡',
+                'tab'    => '搜索优化',
+            ],
+            [
+                'name'   => 'area_to',
+                'label'  => '面积(最高)',
+                'suffix' => '㎡',
+                'tab'    => '搜索优化',
+            ],
+            [
+                'name'  => 'search_keywords',
+                'label' => '搜索关键词 (逗号分隔)',
+                'tab'   => '搜索优化',
+            ],
         ]);
 
         $this->crud->enableBulkActions();

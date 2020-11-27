@@ -36,18 +36,17 @@ class PropertiesCrudController extends CrudController
 
         $this->crud->addColumns([
             [
-                'name' => 'name',
+                'name'  => 'name',
                 'label' => '名称',
+                'type'  => 'house_title',
+                'width' => '34px',
+                'height' => '25px',
+                'border-radius' => '3px',
             ],
             [
                 'name' => 'fee',
                 'label' => '物业费',
                 'suffix' => '元/㎡•月',
-//                'tab'    => '详细信息',
-            ],
-            [
-                'name' => 'desc',
-                'label' => '描述'
             ],
             [
                 'name' => 'address',
@@ -62,8 +61,13 @@ class PropertiesCrudController extends CrudController
 
         $this->crud->addFields([
             [
-                'name' => 'name',
+                'name'  => 'name',
                 'label' => '名称',
+            ],
+            [
+                'name'  => 'photo',
+                'label' => '缩略图',
+                'type'  => 'browse',
             ],
             [
                 'name' => 'desc',

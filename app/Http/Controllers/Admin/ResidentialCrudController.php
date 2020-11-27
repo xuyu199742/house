@@ -125,7 +125,11 @@ class ResidentialCrudController extends CrudController
                 'name' => 'developer',
                 'label' => '开发商',
             ],
-
+            [
+                'name' => 'desc',
+                'label' => '描述',
+                'type' => 'textarea',
+            ],
 
         ]);
 

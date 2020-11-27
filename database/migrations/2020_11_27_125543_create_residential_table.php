@@ -31,6 +31,7 @@ class CreateResidentialTable extends Migration
             $table->string('developer')->nullable()->comment('开发商');
             $table->string('property_phone')->nullable()->comment('物业联系电话');
             $table->string('property_address')->nullable()->comment('物业地址');
+            $table->text('desc')->nullable()->comment('描述');
 //            $table->double('latitude', 18, 14)->nullable()->comment('纬度');
 //            $table->double('longitude', 18, 14)->nullable()->comment('经度');
             $table->bigInteger('building_count')->nullable()->comment('楼栋数');

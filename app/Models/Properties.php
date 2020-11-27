@@ -7,7 +7,7 @@ use Backpack\CRUD\CrudTrait;
 
 class Properties extends Model
 {
-    use CrudTrait;
+    use CrudTrait, PhotoUrl;
 
     /*
     |--------------------------------------------------------------------------

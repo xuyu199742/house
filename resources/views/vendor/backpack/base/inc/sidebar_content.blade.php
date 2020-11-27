@@ -1,6 +1,6 @@
 <li><a href="{{ backpack_url('dashboard') }}"><i class="fa fa-dashboard"></i> <span>系统概览</span></a></li>
 {{--@can('物业管理')--}}
-    <li><a href="{{ backpack_url('properties') }}"><i class="fa fa-building"></i> <span>物业管理</span></a></li>
+    <li><a href="{{ backpack_url('properties') }}"><i class="fa fa-yelp"></i> <span>物业管理</span></a></li>
 {{--@endcan--}}
 
 {{--@can('房源管理')--}}

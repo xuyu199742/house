@@ -97,6 +97,13 @@ class HouseCrudController extends CrudController
                 'type'  => 'browse',
                 'tab'   => '基本信息',
             ],
+            [
+                'name'   => 'house_area',
+                'label'  => '建筑面积',
+                'type'   => 'number',
+                'tab'    => '基本信息',
+                'suffix' => '㎡',
+            ],
     //            [
     //                'name'  => 'user_id',
     //                'label' => '负责人',
@@ -130,16 +137,6 @@ class HouseCrudController extends CrudController
                 'tab'   => '基本信息'
             ],
             [
-                'name'   => 'house_area',
-                'label'  => '建筑面积',
-                'tab'    => '基本信息',
-                'suffix' => '㎡',
-            ],
-            [
-                'name'   => 'house_area',
-                'label'  => '建筑面积',
-                'tab'    => '基本信息',
-            ],[
                 'label' => "所属小区",
                 'type' => 'select2',
                 'name' => 'residential_id',
@@ -179,9 +176,10 @@ class HouseCrudController extends CrudController
                 'tab'   => '详细信息',
             ],
             [
-                'name'  => 'display_price',
-                'label' => '售价',
-                'tab'   => '详细信息',
+                'name'   => 'display_price',
+                'label'  => '售价',
+                'suffix' => '万元',
+                'tab'    => '详细信息',
             ],
             [
                 'name'  => 'room_type',

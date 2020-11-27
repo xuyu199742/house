@@ -20,7 +20,7 @@ class HouseController extends ApiController
         $per_page = request('per_page') ?? 10;
 
         $builder = House::query()->select(
-            ['id', 'name', 'title', 'room_type', 'orientation', 'price', 'display_price', 'photo']
+            ['id', 'name', 'title', 'room_type', 'orientation', 'price', 'display_price', 'photo', 'house_area']
         )->published();
 
         // 关键词
@@ -110,7 +110,7 @@ class HouseController extends ApiController
     public function show($id)
     {
         $house = House::query()->select(
-           ['id', 'name', 'title', 'room_type', 'orientation', 'price','decorate', 'orientation',
+           ['id', 'name', 'title', 'room_type', 'orientation', 'price','decorate', 'orientation', 'house_area',
                'display_price', 'open_at', 'level_desc', 'building_type','orientation', 'years', 'residential_id'
            ]
         )->with('residential.properties')->findOrFail($id);

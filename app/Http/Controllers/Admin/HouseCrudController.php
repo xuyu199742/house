@@ -193,8 +193,9 @@ class HouseCrudController extends CrudController
                 'label'       => '装修风格',
                 'type'        => 'select_from_array',
                 'options'     => [
-                    'no'  => '毛坯',
-                    'yes' => '精装'
+                    'no'      => '毛坯',
+                    'yes'     => '精装',
+                    'default' => '其他'
                 ],
                 'allows_null' => true,
                 'tab'         => '详细信息',

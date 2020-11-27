@@ -19,7 +19,9 @@ class HouseController extends ApiController
     {
         $per_page = request('per_page') ?? 10;
 
-        $builder = House::published();
+        $builder = House::query()->select(
+            ['id', 'name', 'title', 'room_type', 'orientation', 'price', 'display_price', 'photo']
+        )->published();
 
         // 关键词
         if ($keyword = request('keyword')) {
@@ -107,20 +109,24 @@ class HouseController extends ApiController
 
     public function show($id)
     {
-        $house = House::findOrFail($id);
-        $house->view();
-        $house->increment('total_view');
-        $comments     = $house->comments()->approved()->isRoot()->orderBy('created_at', 'desc')->take(4)->get();
-        $articles     = $house->articles()->orderBy('created_at', 'desc')->take(4)->get();
-        $informations = $house->informations()->orderBy('created_at', 'desc')->take(4)->get();
-        $recommends   = House::published()->inRandomOrder()->take(3)->get();
-        $photos       = Photo::ofHouse($house->id)->ofCategory('封面图')->take(10)->get();
+        $house = House::query()->select(
+           ['id', 'name', 'title', 'room_type', 'orientation', 'price','decorate', 'orientation',
+               'display_price', 'open_at', 'level_desc', 'building_type','orientation', 'years', 'residential_id'
+           ]
+        )->with('residential.properties')->findOrFail($id);
+//        $house->view();
+//        $house->increment('total_view');
+//        $comments     = $house->comments()->approved()->isRoot()->orderBy('created_at', 'desc')->take(4)->get();
+//        $articles     = $house->articles()->orderBy('created_at', 'desc')->take(4)->get();
+//        $informations = $house->informations()->orderBy('created_at', 'desc')->take(4)->get();
+//        $recommends   = House::published()->inRandomOrder()->take(3)->get();
+          $photos       = Photo::ofHouse($house->id)->ofCategory('封面图')->take(10)->get();
 
         return $this->success([
             'house'        => $house,
 //            'comments'     => $comments,
 //            'articles'     => $articles,
-            'informations' => $informations,
+//            'informations' => $informations,
 //            'recommends'   => $recommends,
             'photos'       => $photos,
         ]);

@@ -47,7 +47,7 @@ class House extends Model
     protected $table = 'houses';
     protected $guarded = [ 'id' ];
     protected $hidden = [ 'search_meta', 'user' ];
-    protected $appends = [ 'is_favor', 'comment_count', 'is_subscribe' ,'qr_url'];
+//    protected $appends = [ 'is_favor', 'comment_count', 'is_subscribe' ,'qr_url'];
     protected $with = [ 'tags', 'property_types' ];
 
     /*

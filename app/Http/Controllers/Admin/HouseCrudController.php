@@ -138,7 +138,7 @@ class HouseCrudController extends CrudController
                 'name' => 'residential_id',
                 'entity' => 'residential',
                 'attribute' => 'name',
-                'model' => "App\Models\Properties",
+                'model' => "App\Models\Residential",
                 'tab'    => '基本信息',
             ],
 //            [

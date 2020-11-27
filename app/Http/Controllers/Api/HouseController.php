@@ -20,8 +20,8 @@ class HouseController extends ApiController
         $per_page = request('per_page') ?? 10;
 
         $builder = House::query()->select(
-            ['id', 'name', 'title', 'hall' ,'room', 'orientation', 'price', 'display_price', 'photo', 'house_area']
-        )->published();
+            ['id', 'name', 'hall' ,'room', 'orientation', 'price', 'display_price', 'photo', 'house_area', 'residential_id']
+        )->with('residential:id,name')->published();
 
         // 关键词
         if ($keyword = request('keyword')) {

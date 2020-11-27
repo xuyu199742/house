@@ -258,10 +258,10 @@ class House extends Model
                     $operate   = '>';
                     $housetype = 5;
                 }
-                $__query->orWhere('room', $operate, $housetype);
+                $_query->orWhere('room', $operate, $housetype);
             }
 
-            return $_query;
+            return $query;
         });
     }
 

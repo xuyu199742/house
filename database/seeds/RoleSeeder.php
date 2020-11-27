@@ -10,7 +10,7 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            '楼盘管理',
+            '房源管理',
             '资讯管理',
             '评论管理',
             '数据配置',

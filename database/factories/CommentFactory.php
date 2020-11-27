@@ -21,7 +21,7 @@ $factory->define(App\Models\Comment::class, function (Faker $faker) {
         'content' =>  $faker->randomElement([
             '周边有什么学校吗?',
             '现在价格大概多少? 有没有优惠了?',
-            '这个楼盘的学区是什么?',
+            '这个房源的学区是什么?',
             '我最近去看了一下, 售楼处的态度不要太吊, 真的是不愁卖啊?'
         ]),
         'user_id' => 2,

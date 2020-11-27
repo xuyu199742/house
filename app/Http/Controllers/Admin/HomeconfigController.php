@@ -17,7 +17,7 @@ class HomeconfigController extends Controller
         if (!$house) {
             return response()->json([
                 'error' => true,
-                'message' => '楼盘不存在'
+                'message' => '房源不存在'
             ], 404);
         }
         $category =  request('category');

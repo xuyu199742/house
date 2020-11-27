@@ -18,7 +18,7 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
         'category' => $faker->randomElement([
-            '楼盘信息',
+            '房源信息',
             '政策动态',
         ]),
         'content' => $faker->paragraph,

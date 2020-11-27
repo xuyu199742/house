@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\House;
-use App\Models\Photo;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\PhotoRequest as StoreRequest;
-use App\Http\Requests\PhotoRequest as UpdateRequest;
+use App\Http\Requests\ShortcutRequest as StoreRequest;
+use App\Http\Requests\ShortcutRequest as UpdateRequest;
 use Backpack\CRUD\CrudPanel;
 
 /**
- * Class PhotoCrudController
+ * Class ShortcutCrudController
+ *
  * @package App\Http\Controllers\Admin
  * @property-read CrudPanel $crud
  */
-class PhotoCrudController extends CrudController
+class PropertiesCrudController extends CrudController
 {
     public function setup()
     {
@@ -25,15 +24,9 @@ class PhotoCrudController extends CrudController
         | CrudPanel Basic Information
         |--------------------------------------------------------------------------
         */
-        $house_id = request()->route('house_id');
-        $this->data['house'] = $house = House::findOrFail($house_id);
-        $this->data['house_id'] = $house_id;
-
-        $this->crud->setModel('App\Models\Photo');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/house/' . $house_id . '/photo');
-        $this->crud->setEntityNameStrings('图片', $house->name . '图片');
-
-        $this->crud->addClause('ofHouse', $house_id);
+        $this->crud->setModel('App\Models\Properties');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/properties');
+        $this->crud->setEntityNameStrings('物业管理', '物业管理');
 
         /*
         |--------------------------------------------------------------------------
@@ -43,56 +36,61 @@ class PhotoCrudController extends CrudController
 
         $this->crud->addColumns([
             [
-                'name' => 'url',
-                'label' => '图片',
-                'type' => 'image'
+                'name' => 'name',
+                'label' => '名称',
+            ],
+            [
+                'name' => 'fee',
+                'label' => '物业费',
+                'suffix' => '元/㎡•月',
+//                'tab'    => '详细信息',
             ],
             [
                 'name' => 'desc',
                 'label' => '描述'
             ],
             [
-                'name' => 'category',
-                'label' => '分类',
+                'name' => 'address',
+                'label' => '地址',
+            ],
+            [
+                'name' => 'phone',
+                'label' => '联系电话',
             ],
         ]);
+
 
         $this->crud->addFields([
             [
-                'name' => 'url',
-                'label' => '图片',
-                'type' => 'browse'
+                'name' => 'name',
+                'label' => '名称',
             ],
             [
                 'name' => 'desc',
                 'label' => '描述'
             ],
             [
-                'name' => 'category',
-                'label' => '分类',
-                'type' => 'select_from_array',
-                'options' => Photo::CATEGORIES,
+                'name' => 'address',
+                'label' => '地址',
+            ],
+            [
+                'name' => 'fee',
+                'label' => '物业费',
+                'suffix' => '元/㎡•月',
+            ],
+            [
+                'name' => 'phone',
+                'label' => '联系电话',
             ],
         ]);
 
+        // add asterisk for fields that are required in ShortcutRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
-        $this->crud->setListView('house.photos');
-
-        $this->crud->orderBy('order', 'desc');
-
-        $this->crud->addFilter([
-            'name' => 'category',
-            'type' => 'dropdown',
-            'label' => '分类'
-        ], Photo::CATEGORIES, function ($value) {
-            $this->crud->addClause('where', 'category', $value);
-        });
     }
 
     public function store(StoreRequest $request)
     {
-        $request->merge(['house_id' => $this->data['house_id']]);
         // your additional operations before save here
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here

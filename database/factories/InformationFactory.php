@@ -24,7 +24,7 @@ $factory->define(App\Models\Information::class, function (Faker $faker) {
             '公开售楼处样板间'
         ]),
         'type'       => $faker->randomElement([
-            '楼盘新闻',
+            '房源新闻',
             '预售开盘',
             '摇号选房'
         ]),

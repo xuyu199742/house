@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-        <a href="{{backpack_url('house')}}" class="btn btn-default btn-sm m-b-10"><i class="fa fa-arrow-left"></i> 返回所有楼盘</a>
+        <a href="{{backpack_url('house')}}" class="btn btn-default btn-sm m-b-10"><i class="fa fa-arrow-left"></i> 返回所有房源</a>
     </div>
 
     <div class="box">
@@ -58,13 +58,13 @@
                 </div>
             @endif
         </div>
-        <div class="box-footer">
-            <small>
-                <i class="fa fa-eye"></i> 浏览: <span class="text-bold">{{number_format($house->total_view)}}</span>
-                <i class="fa fa-heart-o m-l-10"></i> 关注: <span class="text-bold">{{number_format($house->total_favor)}}</span>
-                <i class="fa fa-comment-o m-l-10"></i> 评论: <span class="text-bold">{{number_format($house->comments()->count())}}</span>
-            </small>
-        </div>
+{{--        <div class="box-footer">--}}
+{{--            <small>--}}
+{{--                <i class="fa fa-eye"></i> 浏览: <span class="text-bold">{{number_format($house->total_view)}}</span>--}}
+{{--                <i class="fa fa-heart-o m-l-10"></i> 关注: <span class="text-bold">{{number_format($house->total_favor)}}</span>--}}
+{{--                <i class="fa fa-comment-o m-l-10"></i> 评论: <span class="text-bold">{{number_format($house->comments()->count())}}</span>--}}
+{{--            </small>--}}
+{{--        </div>--}}
     </div>
 
     @yield('house_content')

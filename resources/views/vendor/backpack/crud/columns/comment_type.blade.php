@@ -5,7 +5,7 @@
 
     switch ($comment_type) {
         case \App\Models\House::class:
-            $label =  '[楼盘] '. \App\Models\House::find($comment_id)->name;
+            $label =  '[房源] '. \App\Models\House::find($comment_id)->name;
             $link = backpack_url('house/'.$comment_id);
             break;
         case \App\Models\Article::class:

@@ -14,7 +14,7 @@
                     <td>{{$house->address}}</td>
                 </tr>
                 <tr>
-                    <td class="bg-gray-light">开盘时间</td>
+                    <td class="bg-gray-light">挂牌时间</td>
                     <td>{{$house->open_at}}</td>
                 </tr>
                 <tr>

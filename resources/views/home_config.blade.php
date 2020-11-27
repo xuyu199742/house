@@ -45,7 +45,7 @@
             <!-- /.box-body -->
             <div class="box-footer">
                 <div class="input-group">
-                    <select id="house_id_{{$category->id}}" class="js-data-example-ajax form-control select2_field" href="/api/house_quicksearch" style="width:100%" inputMessage="请输入楼盘编号(可部分匹配)">
+                    <select id="house_id_{{$category->id}}" class="js-data-example-ajax form-control select2_field" href="/api/house_quicksearch" style="width:100%" inputMessage="请输入房源编号(可部分匹配)">
                     </select>
                     <a href="javascript:;" class="input-group-addon" onclick="addHomeConfig('{{$category->id}}')"><i
                                 class="fa fa-plus"></i> 添加</a>
@@ -128,7 +128,7 @@
       function addHomeConfig(category) {
         let house_id = $("#house_id_" + category).val();
         if (!house_id) {
-          alert('请填写楼盘id');
+          alert('请填写房源id');
           return;
         }
 

@@ -29,7 +29,7 @@ class HouseCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\House');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/house');
-        $this->crud->setEntityNameStrings('楼盘', '楼盘');
+        $this->crud->setEntityNameStrings('房源', '房源');
 
         /*
         |--------------------------------------------------------------------------
@@ -39,11 +39,11 @@ class HouseCrudController extends CrudController
         $this->crud->addColumns([
             [
                 'name'  => 'id',
-                'label' => '楼盘编号',
+                'label' => '房源编号',
             ],
             [
                 'name'  => 'name',
-                'label' => '楼盘名称',
+                'label' => '房源名称',
                 'type'  => 'house_title',
                 'width' => '34px',
                 'height' => '25px',
@@ -63,17 +63,22 @@ class HouseCrudController extends CrudController
                     '0' => '草稿'
                 ],
             ],
-            [
-                'name'  => 'user_id',
-                'label' => '负责人',
-                'type' => 'user'
-            ],
+//            [
+//                'name'  => 'user_id',
+//                'label' => '负责人',
+//                'type' => 'user'
+//            ],
         ]);
 
         $this->crud->addFields([
             [
                 'name'  => 'name',
-                'label' => '楼盘/地皮名称',
+                'label' => '房源名称',
+                'tab'   => '基本信息',
+            ],
+            [
+                'name'  => 'title',
+                'label' => '房源标题',
                 'tab'   => '基本信息',
             ],
             [
@@ -92,56 +97,21 @@ class HouseCrudController extends CrudController
                 'type'  => 'browse',
                 'tab'   => '基本信息',
             ],
-            [
-                'name'  => 'user_id',
-                'label' => '负责人',
-                'type'  => 'select_from_array',
-                'allows_null' => true,
-                'options' => User::employee()->pluck('name', 'id')->toArray(),
-                'tab'   => '基本信息',
-            ],
-            [
-                'name'   => 'price',
-                'label'  => '均价',
-                'suffix' => '元/㎡',
-                'tab'    => '基本信息',
-            ],
-            [
-                'name'  => 'display_price',
-                'label' => '显示价格',
-                'tab'   => '基本信息',
-            ],
-            [
-                'name'        => 'decorate',
-                'label'       => '装修风格',
-                'type'        => 'select_from_array',
-                'options'     => [
-                    'no'  => '毛坯',
-                    'yes' => '精装'
-                ],
-                'allows_null' => true,
-                'tab'         => '基本信息',
-            ],
-            [
-                'name'                => 'open_at',
-                'label'               => '开盘时间',
-                'readonly'            => false,
-                'type'                => 'date_picker',
-                'tab'                 => '基本信息',
-                'date_picker_options' => [
-                    'todayHighlight' => true,
-                    'clearBtn'       => true,
-                    'format'         => 'yyyy-mm-dd',
-                    'language'       => "zh-CN",
-                ],
-            ],
-            [
-                'name'    => 'sale_status',
-                'label'   => '楼盘状态',
-                'tab'     => '基本信息',
-                'type'    => 'select_from_array',
-                'options' => array_combine(House::SALE_STATUS, House::SALE_STATUS),
-            ],
+    //            [
+    //                'name'  => 'user_id',
+    //                'label' => '负责人',
+    //                'type'  => 'select_from_array',
+    //                'allows_null' => true,
+    //                'options' => User::employee()->pluck('name', 'id')->toArray(),
+    //                'tab'   => '基本信息',
+    //            ],
+//            [
+//                'name'    => 'sale_status',
+//                'label'   => '房源状态',
+//                'tab'     => '基本信息',
+//                'type'    => 'select_from_array',
+//                'options' => array_combine(House::SALE_STATUS, House::SALE_STATUS),
+//            ],
             [
                 'label'                      => '区属',
                 'type'                       => 'select_grouped',
@@ -155,28 +125,101 @@ class HouseCrudController extends CrudController
             ],
             [
                 'name'  => 'address',
-                'label' => '楼盘地址',
+                'label' => '房源地址',
                 'type'  => 'map',
                 'tab'   => '基本信息'
             ],
             [
-                'name'  => 'sales_address',
-                'label' => '售楼处地址',
-                'tab'   => '基本信息'
+                'name'   => 'house_area',
+                'label'  => '建筑面积',
+                'tab'    => '基本信息',
+                'suffix' => '㎡',
             ],
             [
-                'name'  => 'sales_phone',
-                'label' => '售楼处电话',
-                'tab'   => '基本信息'
+                'name'   => 'house_area',
+                'label'  => '建筑面积',
+                'tab'    => '基本信息',
+            ],[
+                'label' => "所属小区",
+                'type' => 'select2',
+                'name' => 'residential_id',
+                'entity' => 'residential',
+                'attribute' => 'name',
+                'model' => "App\Models\Properties",
+                'tab'    => '基本信息',
+            ],
+//            [
+//                'label'     => "选择物业",
+//                'type'      => 'select2',
+//                'name'      => 'properties_id',
+//                'entity'    => 'properties',
+//                'attribute' => 'name',
+//                'model'     => "App\Models\Properties",
+//                'tab'       => '基本信息'
+//            ],
+//            [
+//                'name'  => 'sales_address',
+//                'label' => '物业地址',
+//                'tab'   => '基本信息'
+//            ],
+//            [
+//                'name'  => 'sales_phone',
+//                'label' => '物业电话',
+//                'tab'   => '基本信息'
+//            ],
+            [
+                'name'   => 'price',
+                'label'  => '单价',
+                'suffix' => '元/㎡',
+                'tab'    => '详细信息',
+            ],
+            [
+                'name'  => 'orientation',
+                'label' => '朝向',
+                'tab'   => '详细信息',
+            ],
+            [
+                'name'  => 'display_price',
+                'label' => '售价',
+                'tab'   => '详细信息',
+            ],
+            [
+                'name'  => 'room_type',
+                'label' => '房型',
+                'tab'   => '详细信息'
+            ],
+            [
+                'name'        => 'decorate',
+                'label'       => '装修风格',
+                'type'        => 'select_from_array',
+                'options'     => [
+                    'no'  => '毛坯',
+                    'yes' => '精装'
+                ],
+                'allows_null' => true,
+                'tab'         => '详细信息',
+            ],
+            [
+                'name'                => 'open_at',
+                'label'               => '挂盘时间',
+                'readonly'            => false,
+                'type'                => 'date_picker',
+                'tab'                 => '详细信息',
+                'date_picker_options' => [
+                    'todayHighlight' => true,
+                    'clearBtn'       => true,
+                    'format'         => 'yyyy-mm-dd',
+                    'language'       => "zh-CN",
+                ],
             ],
             [
                 'name'  => 'desc',
-                'label' => '项目介绍',
+                'label' => '房源介绍',
                 'type'  => 'textarea',
                 'tab'   => '详细信息',
             ],
             [
-                'label'     => '物业类型',
+                'label'     => '房源用途',
                 'type'      => 'checklist',
                 'name'      => 'property_types',
                 'entity'    => 'property_types',
@@ -185,73 +228,103 @@ class HouseCrudController extends CrudController
                 'pivot'     => true,
                 'tab'       => '详细信息',
             ],
-            [
-                'name'   => 'number_of_year',
-                'label'  => '产权年限',
-                'suffix' => '年',
-                'tab'    => '详细信息',
-            ],
-            [
-                'name'  => 'developer',
-                'label' => '开发商',
-                'tab'   => '详细信息',
-            ],
-            [
-                'name'   => 'area',
-                'label'  => '占地面积',
-                'tab'    => '详细信息',
-                'suffix' => '㎡',
-            ],
-            [
-                'name'   => 'house_area',
-                'label'  => '建筑面积',
-                'tab'    => '详细信息',
-                'suffix' => '㎡',
-            ],
-            [
-                'name'  => 'plot_ratio',
-                'label' => '容积率',
-                'tab'   => '详细信息',
-            ],
-            [
-                'name'   => 'greening_rate',
-                'label'  => '绿化率',
-                'tab'    => '详细信息',
-                'suffix' => '%',
-            ],
-            [
-                'name'   => 'parking',
-                'label'  => '车位配比',
-                'tab'    => '详细信息',
-            ],
-            [
-                'name'  => 'building_count',
-                'label' => '楼栋数',
-                'tab'   => '详细信息',
-            ],
-            [
-                'name'  => 'house_count',
-                'label' => '总户数',
-                'tab'   => '详细信息',
-                'suffix' => '户',
-            ],
-            [
-                'name'  => 'property_management',
-                'label' => '物业公司',
-                'tab'   => '详细信息',
-            ],
-            [
-                'name'   => 'service_price',
-                'label'  => '物业费',
-                'suffix' => '元/㎡•月',
-                'tab'    => '详细信息',
-            ],
+//            [
+//                'name'   => 'number_of_year',
+//                'label'  => '产权年限',
+//                'suffix' => '年',
+//                'tab'    => '详细信息',
+//            ],
+//            [
+//                'name'  => 'developer',
+//                'label' => '开发商',
+//                'tab'   => '详细信息',
+//            ],
+//            [
+//                'name'   => 'area',
+//                'label'  => '占地面积',
+//                'tab'    => '详细信息',
+//                'suffix' => '㎡',
+//            ],
+
+//            [
+//                'name'  => 'plot_ratio',
+//                'label' => '容积率',
+//                'tab'   => '详细信息',
+//            ],
+//            [
+//                'name'   => 'greening_rate',
+//                'label'  => '绿化率',
+//                'tab'    => '详细信息',
+//                'suffix' => '%',
+//            ],
+//            [
+//                'name'   => 'parking',
+//                'label'  => '车位配比',
+//                'tab'    => '详细信息',
+//            ],
+//            [
+//                'name'  => 'building_count',
+//                'label' => '楼栋数',
+//                'tab'   => '详细信息',
+//            ],
+//            [
+//                'name'  => 'house_count',
+//                'label' => '总户数',
+//                'tab'   => '详细信息',
+//                'suffix' => '户',
+//            ],
+//            [
+//                'name'  => 'property_management',
+//                'label' => '物业公司',
+//                'tab'   => '详细信息',
+//            ],
+//            [
+//                'name'   => 'service_price',
+//                'label'  => '物业费',
+//                'suffix' => '元/㎡•月',
+//                'tab'    => '详细信息',
+//            ],
             [
                 'name'  => 'level_desc',
-                'label' => '楼层状态',
-                'type'  => 'textarea',
+                'label' => '楼层',
                 'tab'   => '详细信息',
             ],
+
+            [
+                'name'  => 'building_type',
+                'label' => '楼型',
+                'tab'   => '详细信息',
+            ],
+            [   // radio
+                'name'        => 'elevator', // the name of the db column
+                'label'       => '电梯', // the input label
+                'type'        => 'radio',
+                'inline'      => true,
+                'options'     => [
+                    0 => "没有",
+                    1 => "有"
+                ],
+                'tab'   => '详细信息',
+            ],
+            [
+                'name'                => 'years',
+                'label'               => '年代',
+                'tab'                 => '详细信息',
+                'readonly'            => false,
+                'type'                => 'date_picker',
+                'date_picker_options' => [
+                    'todayHighlight'  => true,
+                    'clearBtn'        => true,
+                    'format'          => 'yyyy-mm-dd',
+                    'language'        => "zh-CN",
+                ],
+            ],
+            [
+                'name'  => 'ownership',
+                'label' => '权属',
+                'tab'   => '详细信息',
+            ],
+
             [
                 'name'  => 'around_traffic',
                 'label' => '公共交通',
@@ -292,107 +365,107 @@ class HouseCrudController extends CrudController
                 'name'  => 'total_view',
                 'label' => '浏览人数',
                 'type'  => 'number',
-                'tab'   => '楼盘数据',
+                'tab'   => '房源数据',
             ],
             [
                 'name'  => 'total_favor',
                 'label' => '关注人数',
                 'type'  => 'number',
-                'tab'   => '楼盘数据',
+                'tab'   => '房源数据',
             ],
-            [
-                'name'  => 'category_1',
-                'label' => '热门楼盘',
-                'type'  => 'checkbox',
-                'wrapperAttributes' => [
-                    'class' => 'form-group col-md-2'
-                ],
-                'tab'   => '搜索优化',
-            ],
-            [
-                'name'  => 'category_2',
-                'label' => '最新楼盘',
-                'type'  => 'checkbox',
-                'wrapperAttributes' => [
-                    'class' => 'form-group col-md-2'
-                ],
-                'tab'   => '搜索优化',
-            ],
-            [
-                'name'  => 'category_3',
-                'label' => '即将预售',
-                'type'  => 'checkbox',
-                'wrapperAttributes' => [
-                    'class' => 'form-group col-md-2'
-                ],
-                'tab'   => '搜索优化',
-            ],
-            [
-                'name'  => 'category_4',
-                'label' => '最新摇号',
-                'type'  => 'checkbox',
-                'wrapperAttributes' => [
-                    'class' => 'form-group col-md-2'
-                ],
-                'tab'   => '搜索优化',
-            ],
-            [
-                'name'  => 'category_5',
-                'label' => '摇号剩余',
-                'type'  => 'checkbox',
-                'wrapperAttributes' => [
-                    'class' => 'form-group col-md-2'
-                ],
-                'tab'   => '搜索优化',
-            ],
-            [
-                'name'   => 'price_from',
-                'label'  => '单价(最低)',
-                'suffix' => '元/㎡',
-                'tab'    => '搜索优化',
-            ],
-            [
-                'name'   => 'price_to',
-                'label'  => '单价(最高)',
-                'suffix' => '元/㎡',
-                'tab'    => '搜索优化',
-            ],
-            [
-                'name'   => 'amount_from',
-                'label'  => '总价(最低)',
-                'suffix' => '万元',
-                'tab'    => '搜索优化',
-            ],
-            [
-                'name'   => 'amount_to',
-                'label'  => '总价(最高)',
-                'suffix' => '万元',
-                'tab'    => '搜索优化',
-            ],
-            [
-                'name'   => 'area_from',
-                'label'  => '面积(最低)',
-                'suffix' => '㎡',
-                'tab'    => '搜索优化',
-            ],
-            [
-                'name'   => 'area_to',
-                'label'  => '面积(最高)',
-                'suffix' => '㎡',
-                'tab'    => '搜索优化',
-            ],
-            [
-                'name'  => 'search_keywords',
-                'label' => '搜索关键词 (逗号分隔)',
-                'tab'   => '搜索优化',
-            ],
+//            [
+//                'name'  => 'category_1',
+//                'label' => '热门房源',
+//                'type'  => 'checkbox',
+//                'wrapperAttributes' => [
+//                    'class' => 'form-group col-md-2'
+//                ],
+//                'tab'   => '搜索优化',
+//            ],
+//            [
+//                'name'  => 'category_2',
+//                'label' => '最新房源',
+//                'type'  => 'checkbox',
+//                'wrapperAttributes' => [
+//                    'class' => 'form-group col-md-2'
+//                ],
+//                'tab'   => '搜索优化',
+//            ],
+//            [
+//                'name'  => 'category_3',
+//                'label' => '即将预售',
+//                'type'  => 'checkbox',
+//                'wrapperAttributes' => [
+//                    'class' => 'form-group col-md-2'
+//                ],
+//                'tab'   => '搜索优化',
+//            ],
+//            [
+//                'name'  => 'category_4',
+//                'label' => '最新摇号',
+//                'type'  => 'checkbox',
+//                'wrapperAttributes' => [
+//                    'class' => 'form-group col-md-2'
+//                ],
+//                'tab'   => '搜索优化',
+//            ],
+//            [
+//                'name'  => 'category_5',
+//                'label' => '摇号剩余',
+//                'type'  => 'checkbox',
+//                'wrapperAttributes' => [
+//                    'class' => 'form-group col-md-2'
+//                ],
+//                'tab'   => '搜索优化',
+//            ],
+//            [
+//                'name'   => 'price_from',
+//                'label'  => '单价(最低)',
+//                'suffix' => '元/㎡',
+//                'tab'    => '搜索优化',
+//            ],
+//            [
+//                'name'   => 'price_to',
+//                'label'  => '单价(最高)',
+//                'suffix' => '元/㎡',
+//                'tab'    => '搜索优化',
+//            ],
+//            [
+//                'name'   => 'amount_from',
+//                'label'  => '总价(最低)',
+//                'suffix' => '万元',
+//                'tab'    => '搜索优化',
+//            ],
+//            [
+//                'name'   => 'amount_to',
+//                'label'  => '总价(最高)',
+//                'suffix' => '万元',
+//                'tab'    => '搜索优化',
+//            ],
+//            [
+//                'name'   => 'area_from',
+//                'label'  => '面积(最低)',
+//                'suffix' => '㎡',
+//                'tab'    => '搜索优化',
+//            ],
+//            [
+//                'name'   => 'area_to',
+//                'label'  => '面积(最高)',
+//                'suffix' => '㎡',
+//                'tab'    => '搜索优化',
+//            ],
+//            [
+//                'name'  => 'search_keywords',
+//                'label' => '搜索关键词 (逗号分隔)',
+//                'tab'   => '搜索优化',
+//            ],
         ]);
 
         $this->crud->enableBulkActions();
 
         $this->crud->addButtonFromView('top', 'bulk_publish', 'bulk_publish');
         $this->crud->addButtonFromView('line', 'publish_action', 'publish_action');
-        $this->crud->addButtonFromView('line', 'top_action', 'top_action');
+//        $this->crud->addButtonFromView('line', 'top_action', 'top_action');
 
         // add asterisk for fields that are required in HouseRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
@@ -407,7 +480,7 @@ class HouseCrudController extends CrudController
         $this->crud->addFilter([
             'name'  => 'id',
             'type'  => 'text',
-            'label' => '楼盘编号'
+            'label' => '房源编号'
         ], '', function ($value) {
             $this->crud->addClause('where', 'id', $value);
         });
@@ -415,7 +488,7 @@ class HouseCrudController extends CrudController
         $this->crud->addFilter([
             'name'  => 'name',
             'type'  => 'text',
-            'label' => '楼盘名称'
+            'label' => '房源名称'
         ], '', function ($value) {
             $this->crud->addClause('where', 'name', 'like', "%{$value}%");
         });
@@ -423,7 +496,7 @@ class HouseCrudController extends CrudController
         $this->crud->addFilter([
             'name'  => 'district_id',
             'type'  => 'dropdown',
-            'label' => '楼盘区域'
+            'label' => '房源区域'
         ], District::pluck('name', 'id')->toArray(), function ($value) {
             $this->crud->addClause('where', 'district_id', $value);
         });
@@ -439,35 +512,35 @@ class HouseCrudController extends CrudController
             $this->crud->addClause('where', 'status', $value);
         });
 
-        $this->crud->addFilter([
-            'name'  => 'user_id',
-            'type'  => 'dropdown',
-            'label' => '负责人'
-        ], User::employee()->pluck('name', 'id')->toArray(), function ($value) {
-            $this->crud->addClause('where', 'user_id', $value);
-        });
+//        $this->crud->addFilter([
+//            'name'  => 'user_id',
+//            'type'  => 'dropdown',
+//            'label' => '负责人'
+//        ], User::employee()->pluck('name', 'id')->toArray(), function ($value) {
+//            $this->crud->addClause('where', 'user_id', $value);
+//        });
 
-        $this->crud->addFilter([
-            'name'  => 'category',
-            'type'  => 'dropdown',
-            'label' => '楼盘分类'
-        ], [
-            'category_1' => '热门楼盘',
-            'category_2' => '最新楼盘',
-            'category_3' => '即将预售',
-            'category_4' => '最新摇号',
-            'category_5' => '摇号剩余',
-        ], function ($value) {
-            $this->crud->addClause('where', $value, 1);
-        });
+//        $this->crud->addFilter([
+//            'name'  => 'category',
+//            'type'  => 'dropdown',
+//            'label' => '房源分类'
+//        ], [
+//            'category_1' => '热门房源',
+//            'category_2' => '最新房源',
+//            'category_3' => '即将预售',
+//            'category_4' => '最新摇号',
+//            'category_5' => '摇号剩余',
+//        ], function ($value) {
+//            $this->crud->addClause('where', $value, 1);
+//        });
 
-        $this->crud->addFilter([
-            'name'  => 'sale_status',
-            'type'  => 'dropdown',
-            'label' => '销售状态'
-        ], array_combine(House::SALE_STATUS, House::SALE_STATUS), function ($value) {
-            $this->crud->addClause('where', 'sale_status', $value);
-        });
+//        $this->crud->addFilter([
+//            'name'  => 'sale_status',
+//            'type'  => 'dropdown',
+//            'label' => '销售状态'
+//        ], array_combine(House::SALE_STATUS, House::SALE_STATUS), function ($value) {
+//            $this->crud->addClause('where', 'sale_status', $value);
+//        });
 
         $this->crud->orderBy('is_top', 'desc');
         $this->crud->orderBy('id', 'desc');
@@ -492,7 +565,7 @@ class HouseCrudController extends CrudController
     }
 
     /**
-     * 发布楼盘信息
+     * 发布房源信息
      *
      * @param $house_id
      *
@@ -502,7 +575,7 @@ class HouseCrudController extends CrudController
     {
         $house = House::find($house_id);
         $house->publish();
-        \Alert::success('楼盘 <b>' . $house->name . '</b> 上架成功')->flash();
+        \Alert::success('房源 <b>' . $house->name . '</b> 上架成功')->flash();
 
         return redirect()->back();
     }
@@ -518,13 +591,13 @@ class HouseCrudController extends CrudController
     {
         $house = House::find($house_id);
         $house->unpublish();
-        \Alert::success('楼盘 <b>' . $house->name . '</b> 下架成功')->flash();
+        \Alert::success('房源 <b>' . $house->name . '</b> 下架成功')->flash();
 
         return redirect()->back();
     }
 
     /**
-     * 置顶楼盘信息
+     * 置顶房源信息
      *
      * @param $house_id
      *
@@ -534,13 +607,13 @@ class HouseCrudController extends CrudController
     {
         $house = House::find($house_id);
         $house->top();
-        \Alert::success('楼盘 <b>' . $house->name . '</b> 置顶成功')->flash();
+        \Alert::success('房源 <b>' . $house->name . '</b> 置顶成功')->flash();
 
         return redirect()->back();
     }
 
     /**
-     * 取消置顶楼盘信息
+     * 取消置顶房源信息
      *
      * @param $house_id
      *
@@ -550,7 +623,7 @@ class HouseCrudController extends CrudController
     {
         $house = House::find($house_id);
         $house->unTop();
-        \Alert::success('楼盘 <b>' . $house->name . '</b> 取消置顶成功')->flash();
+        \Alert::success('房源 <b>' . $house->name . '</b> 取消置顶成功')->flash();
 
         return redirect()->back();
     }

@@ -12,14 +12,14 @@ return [
     */
 
     // Project name. Shown in the breadcrumbs and a few other places.
-    'project_name' => '楼市放大镜',
+    'project_name' => '大物业系统',
 
     // Menu logos
-    'logo_lg'   => '<b>楼市放大镜</b>',
+    'logo_lg'   => '<b>大物业系统</b>',
     'logo_mini' => '<i class="fa fa-home"></i>',
 
     // Developer or company name. Shown in footer.
-    'developer_name' => '楼市放大镜',
+    'developer_name' => '大物业系统',
 
     // Developer website. Link in footer.
     'developer_link' => 'https://house315.com.cn',

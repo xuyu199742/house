@@ -15,12 +15,12 @@ class ShortcutSeeder extends Seeder {
             [
                 'photo' => 'images/shortcut/new/1.png?' . rand(10000, 99999),
                 'link_data' => '/pages/house/list/index?type=1',
-                'desc'      => '热门楼盘'
+                'desc'      => '热门房源'
             ],
             [
                 'photo' => 'images/shortcut/new/2.png?' . rand(10000, 99999),
                 'link_data' => '/pages/house/list/index?type=2',
-                'desc'      => '最新楼盘'
+                'desc'      => '最新房源'
             ],
             [
                 'photo' => 'images/shortcut/new/3.png?' . rand(10000, 99999),
@@ -45,7 +45,7 @@ class ShortcutSeeder extends Seeder {
             [
                 'photo' => 'images/shortcut/new/7.png?' . rand(10000, 99999),
                 'link_data' => '/pages/house/list/index',
-                'desc'      => '全部楼盘'
+                'desc'      => '全部房源'
             ],
             [
                 'photo' => 'images/shortcut/new/8.png?' . rand(10000, 99999),

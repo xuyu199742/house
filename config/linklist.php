@@ -22,21 +22,21 @@ return [
         '我的', '/pages/account/index'
     ],
     [
-        '所有楼盘', '/pages/house/list/index'
+        '所有房源', '/pages/house/list/index'
     ],
     [
-        '楼盘介绍页', '/pages/house/show/index?id=<id>', 'id: 楼盘编号'
+        '房源介绍页', '/pages/house/show/index?id=<id>', 'id: 房源编号'
     ],
     [
-        '楼盘详情页', '/pages/house/detail/index?id=<id>', 'id: 楼盘编号'
+        '房源详情页', '/pages/house/detail/index?id=<id>', 'id: 房源编号'
     ],
     [
-        '楼盘图片页', '/pages/house/gallery/index?id=<id>', 'id: 楼盘编号'
+        '房源图片页', '/pages/house/gallery/index?id=<id>', 'id: 房源编号'
     ],
     [
-        '楼盘户型页', '/pages/house/housetype/index?id=<id>', 'id: 楼盘编号'
+        '房源户型页', '/pages/house/housetype/index?id=<id>', 'id: 房源编号'
     ],
     [
-        '楼盘周边页', '/pages/house/around/index?id=<id>', 'id: 楼盘编号'
+        '房源周边页', '/pages/house/around/index?id=<id>', 'id: 房源编号'
     ],
 ];

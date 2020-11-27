@@ -25,7 +25,7 @@ class HomeconfigCategoryCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\HomeconfigCategory');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/homeconfigcategory');
-        $this->crud->setEntityNameStrings('楼盘类型', '楼盘类型');
+        $this->crud->setEntityNameStrings('房源类型', '房源类型');
 
         /*
         |--------------------------------------------------------------------------

@@ -3,24 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\CrudTrait;
 
-class Homeconfig extends Model
+class Residential extends Model
 {
+    use CrudTrait, PhotoUrl;
 
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
-    const CATEGORIES = [
-        "1" => '热门房源',
-        "2" => '最新房源',
-        "3" => '即将预售',
-        "4" => '最新摇号',
-        "5" => '摇号剩余',
-    ];
-    protected $table = 'homeconfigs';
-    protected $guarded = [ 'id' ];
+
+    protected $table = 'residential';
+    protected $guarded = ['id'];
 
     /*
     |--------------------------------------------------------------------------
@@ -33,22 +29,17 @@ class Homeconfig extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    public function house()
+    public function properties()
     {
-        return $this->belongsTo(House::class);
+        return $this->belongsTo(Properties::class);
     }
+
 
     /*
     |--------------------------------------------------------------------------
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
-    public function scopeOfCategory($query, $category)
-    {
-        return $query->where('category', $category);
-    }
 
     /*
     |--------------------------------------------------------------------------

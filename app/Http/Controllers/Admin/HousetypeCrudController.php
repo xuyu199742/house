@@ -90,12 +90,12 @@ class HousetypeCrudController extends CrudController
                 'name' => 'desc',
                 'label' => '户型解读'
             ],
-            [
-                'name' => 'sale_status',
-                'label' => '销售状态',
-                'type' => 'select_from_array',
-                'options' => Housetype::SALE_STATUS
-            ],
+//            [
+//                'name' => 'sale_status',
+//                'label' => '销售状态',
+//                'type' => 'select_from_array',
+//                'options' => Housetype::SALE_STATUS
+//            ],
             [
                 'name' => 'photos',
                 'label' => '图片',

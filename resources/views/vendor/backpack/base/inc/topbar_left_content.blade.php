@@ -21,6 +21,6 @@
 
 <li class="hide">
     <a href="{{ backpack_url('house/create') }}">
-        <i class="fa fa-building-o m-r-5"> </i> 新增楼盘
+        <i class="fa fa-building-o m-r-5"> </i> 新增房源
     </a>
 </li>

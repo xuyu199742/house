@@ -118,10 +118,10 @@ class HouseController extends ApiController
 
         return $this->success([
             'house'        => $house,
-            'comments'     => $comments,
-            'articles'     => $articles,
+//            'comments'     => $comments,
+//            'articles'     => $articles,
             'informations' => $informations,
-            'recommends'   => $recommends,
+//            'recommends'   => $recommends,
             'photos'       => $photos,
         ]);
     }

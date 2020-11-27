@@ -125,13 +125,13 @@ class ArticleCrudController extends CrudController
             ],
             [
                 'name'      => 'houses',
-                'label'     => '关联楼盘',
+                'label'     => '关联房源',
                 'type'      => 'checklist',
                 'entity'    => 'houses',
                 'model'     => House::class,
                 'attribute' => 'name',
                 'pivot'     => true,
-                'tab'       => '关联楼盘'
+                'tab'       => '关联房源'
             ],
         ]);
 

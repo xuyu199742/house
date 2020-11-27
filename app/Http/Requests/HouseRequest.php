@@ -29,6 +29,7 @@ class HouseRequest extends FormRequest
             'name'      => 'required|min:2|max:100',
             'address'   => 'required|min:2|max:100',
             'photo'   => 'required',
+            'title'   => 'required|required|min:2|max:100',
         ];
     }
 
@@ -40,8 +41,8 @@ class HouseRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name'      => '楼盘名称',
-            'address'   => '楼盘地址',
+            'name'      => '房源名称',
+            'address'   => '房源地址',
         ];
     }
 

@@ -185,12 +185,17 @@ class House extends Model
     public function subscribers()
     {
         return $this->belongsToMany(User::class, 'user_information')->withTimestamps();
-        ;
+
     }
 
     public function articles()
     {
         return $this->belongsToMany(Article::class, 'article_house', 'house_id', 'article_id');
+    }
+
+    public function residential()
+    {
+        return $this->belongsTo(Residential::class);
     }
 
     /*

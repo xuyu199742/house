@@ -58,6 +58,10 @@ Route::group([
         // 快捷路径配置
         CRUD::resource('shortcut', 'ShortcutCrudController');
 
+        // 物业
+        CRUD::resource('properties', 'PropertiesCrudController');
+        CRUD::resource('residential', 'ResidentialCrudController');
+
         // 底部导航配置
         CRUD::resource('tab', 'TabCrudController');
 

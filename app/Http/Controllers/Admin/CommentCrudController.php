@@ -70,7 +70,7 @@ class CommentCrudController extends CrudController
                 'label' => '评论源',
                 'type' => 'select_from_array',
                 'options' => [
-                    'App\\Models\\House' => '楼盘',
+                    'App\\Models\\House' => '房源',
                     'App\\Models\\Article' => '文章',
                 ]
             ],
@@ -131,7 +131,7 @@ class CommentCrudController extends CrudController
             'type' => 'dropdown',
             'label'=> '评论源'
         ], [
-            'App\\Models\\House'   => '楼盘',
+            'App\\Models\\House'   => '房源',
             'App\\Models\\Article' => '资讯',
         ], function ($value) {
             $this->crud->addClause('where', 'commentable_type', $value);

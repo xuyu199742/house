@@ -29,10 +29,10 @@
                 let message = '';
                 let api_path = '';
                 if(action == 'publish') {
-                    message = "确定要上架这 :number 个楼盘吗?";
+                    message = "确定要上架这 :number 个房源吗?";
                     api_path = 'bulk-publish';
                 } else {
-                    message = "确定要下架这 :number 个楼盘吗?";
+                    message = "确定要下架这 :number 个房源吗?";
                     api_path = 'bulk-unpublish';
                 }
 
@@ -55,7 +55,7 @@
                         success: function(result) {
                             swal({
                                 title: "操作成功",
-                                text: crud.checkedItems.length+" 条楼盘已上架或下架.",
+                                text: crud.checkedItems.length+" 条房源已上架或下架.",
                                 icon: "success",
                                 button: "好的",
                             });
@@ -65,7 +65,7 @@
                         error: function(result) {
                             swal({
                                 title: "操作失败",
-                                text: crud.checkedItems.length+" 条楼盘未能上架或下架.",
+                                text: crud.checkedItems.length+" 条房源未能上架或下架.",
                                 icon: "error",
                                 button: "好的",
                             });

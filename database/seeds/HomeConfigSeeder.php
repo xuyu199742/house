@@ -10,8 +10,8 @@ class HomeConfigSeeder extends Seeder {
     public function run()
     {
         $categories = [
-            '热门楼盘',
-            '最新楼盘',
+            '热门房源',
+            '最新房源',
             '即将预售',
             '最新摇号',
             '摇号剩余',

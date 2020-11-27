@@ -74,11 +74,21 @@ class CreateHousesTable extends Migration
 
             $table->string('search_keywords')->nullable()->comment('搜索关键词');
 
-            $table->boolean('category_1')->default(false)->comment('热门楼盘');
-            $table->boolean('category_2')->default(false)->comment('最新楼盘');
+            $table->boolean('category_1')->default(false)->comment('热门房源');
+            $table->boolean('category_2')->default(false)->comment('最新房源');
             $table->boolean('category_3')->default(false)->comment('即将预售');
             $table->boolean('category_4')->default(false)->comment('最新摇号');
             $table->boolean('category_5')->default(false)->comment('摇号剩余');
+
+            $table->string('room_type')->nullable()->comment('房型');
+            $table->string('title')->nullable()->comment('标题');
+            $table->string('orientation')->nullable()->comment('朝向');
+            $table->string('building_type')->nullable()->comment('楼型');
+            $table->date('years')->nullable()->comment('年代');
+            $table->date('ownership')->nullable()->comment('产权');
+            $table->date('community_id')->nullable()->comment('小区id');
+            $table->boolean('elevator')->default(false)->comment('电梯');
+
 
             $table->unsignedBigInteger('user_id')->nullable()->comment('负责人');
 

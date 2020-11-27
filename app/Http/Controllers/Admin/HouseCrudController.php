@@ -78,11 +78,6 @@ class HouseCrudController extends CrudController
                 'tab'   => '基本信息',
             ],
             [
-                'name'  => 'title',
-                'label' => '房源标题',
-                'tab'   => '基本信息',
-            ],
-            [
                 'label'     => "标签",
                 'type'      => 'select2_multiple',
                 'name'      => 'tags',

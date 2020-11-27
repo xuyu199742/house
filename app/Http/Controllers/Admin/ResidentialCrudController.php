@@ -77,6 +77,10 @@ class ResidentialCrudController extends CrudController
                 'label' => '小区别名',
             ],
             [
+                'name' => 'address',
+                'label' => '小区地址',
+            ],
+            [
                 'name' => 'type',
                 'label' => '建筑类型',
             ],
